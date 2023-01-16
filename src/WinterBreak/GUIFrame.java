@@ -13,26 +13,43 @@ import javax.swing.JTextField;
 
 
 public class GUIFrame  implements ActionListener{
+	
+	  JFrame frame;
+	  JButton send;
+	  JButton clear;
+	  JTextField userName;
+	  JTextField userPhoneNumber;
+	  JTextField userEmail;
+	  JTextField userAddress;
+	  JCheckBox userContactMethodEmail;
+	  JCheckBox userContactMethodPhone;
+	  JTextArea userNotes;
+	  JLabel userNameLabel;
+	  JLabel userPhoneNumberLabel;
+	  JLabel userEmailLabel;
+	  JLabel userAddressLabel;
+	  JLabel userContactMethodLabel;
+	  JLabel userNotesLabel;
 
 	
 	GUIFrame(){
 		  
-		  JFrame frame = new JFrame();
-		  JButton send = new JButton("Send");
-		  JButton clear = new JButton("Clear");
-		  JTextField userName = new JTextField();
-		  JTextField userPhoneNumber = new JTextField();
-		  JTextField userEmail = new JTextField();
-		  JTextField userAddress = new JTextField();
-		  JCheckBox userContactMethodEmail = new JCheckBox();
-		  JCheckBox userContactMethodPhone = new JCheckBox();
-		  JTextArea userNotes = new JTextArea();
-		  JLabel userNameLabel = new JLabel("Name: ");
-		  JLabel userPhoneNumberLabel = new JLabel("Phone Number: ");
-		  JLabel userEmailLabel = new JLabel("Email: ");
-		  JLabel userAddressLabel = new JLabel("Address: ");
-		  JLabel userContactMethodLabel = new JLabel("Best way to contact: ");
-		  JLabel userNotesLabel = new JLabel("Any notes: ");
+		   frame = new JFrame();
+		   send = new JButton("Send");
+		   clear = new JButton("Clear");
+		   userName = new JTextField();
+		   userPhoneNumber = new JTextField();
+		   userEmail = new JTextField();
+		   userAddress = new JTextField();
+		   userContactMethodEmail = new JCheckBox();
+		   userContactMethodPhone = new JCheckBox();
+		   userNotes = new JTextArea();
+		   userNameLabel = new JLabel("Name: ");
+		   userPhoneNumberLabel = new JLabel("Phone Number: ");
+		   userEmailLabel = new JLabel("Email: ");
+		   userAddressLabel = new JLabel("Address: ");
+		   userContactMethodLabel = new JLabel("Best way to contact: ");
+		   userNotesLabel = new JLabel("Any notes: ");
 		  
 		  
 		  userContactMethodEmail.setText("Email");
@@ -90,6 +107,7 @@ public class GUIFrame  implements ActionListener{
 		  frame.setLayout(null);
 		  frame.setVisible(true);
 		  frame.setResizable(false);
+		  clear.addActionListener(this);
 		  
 		  
 		  
@@ -100,7 +118,17 @@ public class GUIFrame  implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource()==clear) {
+			userNotes.setText("");
+			userName.setText("");
+			userAddress.setText("");
+			userPhoneNumber.setText("");
+			userEmail.setText("");
+			userContactMethodEmail.setSelected(false);
+			userContactMethodPhone.setSelected(false);
+			
+			
+		}
 		
 	}
 	
