@@ -1,5 +1,6 @@
 package WinterBreak;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -53,6 +55,9 @@ public class GUIFrame implements ActionListener{
 	GUIFrame(){
 		  
 		   frame = new JFrame();
+		   frame.setTitle("Orderform by Rehman");
+		   frame.setIconImage((new ImageIcon(getClass().getResource("duck-v3.png")).getImage()));
+		   frame.getContentPane().setBackground(Color.lightGray);
 		   send = new JButton("Send");
 		   clear = new JButton("Clear");
 		   userName = new JTextField();
