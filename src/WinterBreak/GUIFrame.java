@@ -4,9 +4,12 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Properties;
-
+import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -18,6 +21,7 @@ import javax.swing.JTextField;
 public class GUIFrame implements ActionListener{
 	
 	  final String senderEmail = "rehmanhavingfun@gmail.com";
+	  final String storeOwner = "munib.rehman01@gmail.com";
 	  final String senderPassword= "mqbzogjddzuddncf";
 	  final String emailSMTPserver = "smtp.gmail.com";
 	  final String emailServerPort = "587";
@@ -163,6 +167,39 @@ public class GUIFrame implements ActionListener{
 			  	}
 			);
 			
+			
+			try {
+			    // Create a message with the recipient's email address, the sender's email address, and the message content
+			    Message message = new MimeMessage(session);
+			    message.setFrom(new InternetAddress(senderEmail));
+			    
+			    message.addRecipients(Message.RecipientType.TO,
+			        InternetAddress.parse(collectedEmail));
+			    message.addRecipients(Message.RecipientType.TO,
+				        InternetAddress.parse(storeOwner));
+			    
+			    message.setSubject("Orderform Confirmation by Rehman");
+			    message.setText("Name: " + collectedName + "\nPhone Number: " + collectedPhoneNumber + 
+			    		"\nEmail: "+collectedEmail+ "\nAddress: " + collectedAddress+ 
+			    		"\nBest way to get in contact: Phone:"+collectedMethodOfContactPhone+"   Email: " +collectedMethodOfContactEmail +"\nNotes: " + collectedNotes);
+
+			    // Send the email
+			    Transport.send(message);
+			    System.out.println("Email sent successfully.");
+
+			} catch (Exception ex) {
+				System.out.println("Something went wrong sending the email");
+			    ex.printStackTrace();
+			}
+			finally {
+				userNotes.setText("");
+				userName.setText("");
+				userAddress.setText("");
+				userPhoneNumber.setText("");
+				userEmail.setText("");
+				userContactMethodEmail.setSelected(false);
+				userContactMethodPhone.setSelected(false);	
+			}
 			  
 			
 		}
