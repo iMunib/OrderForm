@@ -3,7 +3,10 @@ package WinterBreak;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Properties;
 
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -12,7 +15,16 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
-public class GUIFrame  implements ActionListener{
+public class GUIFrame implements ActionListener{
+	
+	  final String senderEmail = "rehmanhavingfun@gmail.com";
+	  final String senderPassword= "mqbzogjddzuddncf";
+	  final String emailSMTPserver = "smtp.gmail.com";
+	  final String emailServerPort = "587";
+	  String collectedEmail;
+	  String emailSubject;
+	  String emailBody;
+	
 	
 	  JFrame frame;
 	  JButton send;
@@ -30,6 +42,8 @@ public class GUIFrame  implements ActionListener{
 	  JLabel userAddressLabel;
 	  JLabel userContactMethodLabel;
 	  JLabel userNotesLabel;
+	  
+	  
 
 	
 	GUIFrame(){
@@ -108,12 +122,8 @@ public class GUIFrame  implements ActionListener{
 		  frame.setVisible(true);
 		  frame.setResizable(false);
 		  clear.addActionListener(this);
-		  
-		  
-		  
-		  
-		 
-		
+		  send.addActionListener(this);
+		  	
 }
 
 	@Override
@@ -125,8 +135,35 @@ public class GUIFrame  implements ActionListener{
 			userPhoneNumber.setText("");
 			userEmail.setText("");
 			userContactMethodEmail.setSelected(false);
-			userContactMethodPhone.setSelected(false);
+			userContactMethodPhone.setSelected(false);	
+		}
+		else if(e.getSource()==send) {
+			String collectedName = userName.getText();
+			String collectedPhoneNumber = userPhoneNumber.getText();
+			collectedEmail = userEmail.getText();
+			String collectedAddress = userAddress.getText();
+			String collectedNotes = userNotes.getText();
+			Boolean collectedMethodOfContactEmail= userContactMethodEmail.isSelected();
+			Boolean collectedMethodOfContactPhone= userContactMethodPhone.isSelected();
 			
+			// Set up the email properties
+			Properties props = new Properties();
+			props.put("mail.smtp.user", senderEmail);
+			props.put("mail.smtp.host", emailSMTPserver);
+			props.put("mail.smtp.port", emailServerPort);
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.starttls.enable", "true");
+			
+			
+			// Create a session with the email properties
+			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+			    protected PasswordAuthentication getPasswordAuthentication() {
+			        return new PasswordAuthentication(senderEmail, senderPassword);
+			    	}
+			  	}
+			);
+			
+			  
 			
 		}
 		
