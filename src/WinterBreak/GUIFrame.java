@@ -186,7 +186,7 @@ public class GUIFrame implements ActionListener{
 			    message.setSubject("Orderform Confirmation by Rehman");
 			    message.setText("Name: " + collectedName + "\nPhone Number: " + collectedPhoneNumber + 
 			    		"\nEmail: "+collectedEmail+ "\nAddress: " + collectedAddress+ 
-			    		"\nBest way to get in contact: Phone:"+collectedMethodOfContactPhone+"   Email: " +collectedMethodOfContactEmail +"\nNotes: " + collectedNotes);
+			    		"\nBest way to get in contact:\n\tPhone: "+collectedMethodOfContactPhone+"\n\tEmail: " +collectedMethodOfContactEmail +"\nNotes: " + collectedNotes);
 
 			    // Send the email
 			    Transport.send(message);
